@@ -1,0 +1,66 @@
+<form>
+  <div class="frm-group">
+    <label>CEP</label>
+    <input type="text" name="cep" />
+  </div>
+  
+   <div class="frm-group">
+      <label>Rua</label>
+      <input type="text" name="rua" />
+    </div>
+    
+    <div class="frm-group">
+      <label>Bairro</label>
+      <input type="text" name="bairro" />
+    </div>
+    
+    <div class="frm-group">
+      <label>Cidade</label>
+      <input type="text" name="cidade" />
+    </div>
+    
+    <div class="frm-group">
+      <label>Estado</label>
+      <input type="text" name="estado" />
+    </div>
+</form>
+
+<style>
+.frm-group{
+  padding:5px;
+}
+.frm-group label{
+  display: block;
+}
+
+.frm-group:nth-child(1){
+  border: 1px solid #CCC;
+  background: #e5e5e5;
+  padding: 10px 5px;
+}
+</style>
+
+<script>
+(function(){
+
+  const cep = document.querySelector("input[name=cep]");
+  
+  cep.addEventListener('blur', e=> {
+  		const value = cep.value.replace(/[^0-9]+/, '');
+      const url = `https://viacep.com.br/ws/${value}/json/`;
+      
+      fetch(url)
+      .then( response => response.json())
+      .then( json => {
+      		
+          if( json.logradouro ) {
+          	document.querySelector('input[name=rua]').value = json.logradouro;
+            document.querySelector('input[name=bairro]').value = json.bairro;
+            document.querySelector('input[name=cidade]').value = json.localidade;
+            document.querySelector('input[name=estado]').value = json.uf;
+          }      
+      });           
+  });
+
+})();
+</script>
