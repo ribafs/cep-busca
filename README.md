@@ -1,4 +1,4 @@
-# Busca de CEP com ipt
+# Busca de CEP com Javascript
 Busca de CEP usando JavaScript Vanilla com o método fetch e ViaCEP.
 
 Muito simples, confira no link à direita.
